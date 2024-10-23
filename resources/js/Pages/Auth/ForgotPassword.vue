@@ -1,6 +1,10 @@
 <script setup>
 import { useForm, usePage } from "@inertiajs/vue3";
-import { ref, onMounted } from "vue";
+import { ref, onMounted, watch } from "vue";
+import { useQuasar } from 'quasar';
+import validateEmail from '@/helpers.js';
+
+const $q = useQuasar();
 
 defineProps({
   status: {
@@ -16,19 +20,22 @@ const submit = () => {
   form.post(route('password.email'));
 };
 
-function validateEmail(email) {
-  return /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/.test(email);
-}
-
-onMounted(() => {
-  const $page = usePage();
-  console.log($page.props.status);
-})
+watch(
+  () => usePage().props.status,
+  (newValue, oldValue) => {
+    if (newValue) {
+      $q.notify(newValue);
+    }
+  }
+);
 </script>
 
 <template>
-  <Head title="Forgot Password" />
+
+
   <q-page class="row justify-center items-center">
+
+    <Head title="Forgot Password" />
     <div class="column">
       <div class="row justify-center">
         <h5 class="text-h5 q-my-md">Forgot Password</h5>

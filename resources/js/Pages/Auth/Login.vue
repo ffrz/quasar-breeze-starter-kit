@@ -1,6 +1,7 @@
 <script setup>
 import { useForm } from "@inertiajs/vue3";
 import { ref } from "vue";
+import validateEmail from '@/helpers.js';
 
 let emailInput = ref(null);
 let form = useForm({
@@ -19,9 +20,6 @@ const login = () => {
   });
 };
 
-function validateEmail(email) {
-  return /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/.test(email);
-}
 </script>
 
 <template>
