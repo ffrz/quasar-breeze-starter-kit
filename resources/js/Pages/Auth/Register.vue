@@ -54,16 +54,12 @@ function validatePasswordConfirmation() {
                   ]" />
               </q-card-section>
               <q-card-actions>
-                <q-btn type="submit" color="primary" class="full-width" label="Login" />
+                <q-btn type="submit" color="primary" class="full-width" label="Register" />
               </q-card-actions>
               <q-card-section class="text-center q-pa-none q-mt-md">
                 <p class="q-my-xs text-grey-7">
-                  Not reigistered?
-                  <Link :href="route('register')">Create an Account</Link>
-                </p>
-                <p class="q-my-xs text-grey-7">
-                  Forgot password?
-                  <Link :href="route('password.request')">Reset Password</Link>
+                  Already reigistered?
+                  <Link :href="route('login')">Login</Link>
                 </p>
               </q-card-section>
             </q-card>
