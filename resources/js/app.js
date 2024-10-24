@@ -1,4 +1,4 @@
-import "./bootstrap";
+import "@/bootstrap";
 
 import { createApp, h } from "vue";
 import { createInertiaApp, Head, Link } from "@inertiajs/vue3";
@@ -21,9 +21,9 @@ createInertiaApp({
     const pages = import.meta.glob("./Pages/**/*.vue", { eager: true });
     let page = pages[`./Pages/${name}.vue`];
 
-    if (page.default.layout !== false) {
-      page.default.layout = page.default.layout || GuestLayout;
-    }
+    // if (page.default.layout !== false) {
+    //   page.default.layout = page.default.layout || GuestLayout;
+    // }
 
     // if (!flashMessageProcessed) {
     //   flashMessageProcessed = true;
