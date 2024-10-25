@@ -1,6 +1,7 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
 
+
 defineProps({
   canLogin: {
     type: Boolean,
@@ -20,32 +21,43 @@ defineProps({
 </script>
 
 <template>
-
-  <Head title="Welcome" />
-  <q-page class="row">
-    <div class="column q-pa-lg">
-      <div>
-        <Link :href="route('login')">Login</Link>
+  <guest-layout>
+    <i-head title="Welcome" />
+    <q-page class="row">
+      <div class="column q-pa-lg">
+        <div class="row justify-center items-center">
+          <div class="q-gutter-md q-ma-lg">
+            <i-link :href="route('login')">Login</i-link>
+            <i-link :href="route('register')">Register</i-link>
+          </div>
+        </div>
+        <div class="q-mb-md text-h4">Home</div>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Autem soluta, accusamus placeat eius eligendi
+          perferendis quisquam veritatis iste debitis laboriosam facere et aliquam quos beatae illo distinctio rerum
+          eos!
+          Expedita, voluptatem. Aut nihil deleniti magni fuga eius labore aliquam nulla quod ullam sunt amet eum
+          asperiores, harum unde eligendi tempore sapiente. Placeat sed, dignissimos voluptatum perspiciatis saepe
+          aspernatur, maxime est, ipsam quas nobis cumque sunt labore molestias? Amet in sed ullam recusandae, nostrum
+          dicta facilis blanditiis incidunt quae commodi soluta id impedit vel fugit illo, molestias reiciendis,
+          provident
+          nam molestiae! Ipsam, hic. Facere aut quisquam praesentium enim illum, pariatur nam.</p>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit aspernatur maxime consectetur, consequatur
+          excepturi facilis praesentium rem placeat sapiente, maiores doloribus modi voluptate. Unde autem dolor
+          officiis
+          numquam incidunt quasi aspernatur nam dolores ratione quidem recusandae, nulla qui provident molestias odit
+          nemo
+          praesentium quas voluptatem aliquid perferendis, iste veritatis vitae. Dolor, eligendi quidem distinctio
+          asperiores doloremque culpa corporis quibusdam earum ex laudantium iure officia ullam nostrum maxime
+          voluptatum
+          laboriosam impedit labore illum. Culpa, veniam dolor odio ad eius nisi, aspernatur quia veritatis blanditiis
+          repellat id minima deserunt beatae?</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque, cum nulla. Ut eligendi tenetur aliquam cum
+          mollitia repellat voluptas, fugiat doloremque sunt commodi enim excepturi distinctio id sapiente incidunt
+          ipsam
+          asperiores cupiditate, labore libero! Ad facere magni cumque perspiciatis, adipisci possimus pariatur quo
+          nobis
+          minus, est enim similique quaerat vel asperiores ipsam harum et, totam fugit.</p>
       </div>
-      <div class="q-mb-md text-h4">Home</div>
-      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Autem soluta, accusamus placeat eius eligendi
-        perferendis quisquam veritatis iste debitis laboriosam facere et aliquam quos beatae illo distinctio rerum eos!
-        Expedita, voluptatem. Aut nihil deleniti magni fuga eius labore aliquam nulla quod ullam sunt amet eum
-        asperiores, harum unde eligendi tempore sapiente. Placeat sed, dignissimos voluptatum perspiciatis saepe
-        aspernatur, maxime est, ipsam quas nobis cumque sunt labore molestias? Amet in sed ullam recusandae, nostrum
-        dicta facilis blanditiis incidunt quae commodi soluta id impedit vel fugit illo, molestias reiciendis, provident
-        nam molestiae! Ipsam, hic. Facere aut quisquam praesentium enim illum, pariatur nam.</p>
-      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit aspernatur maxime consectetur, consequatur
-        excepturi facilis praesentium rem placeat sapiente, maiores doloribus modi voluptate. Unde autem dolor officiis
-        numquam incidunt quasi aspernatur nam dolores ratione quidem recusandae, nulla qui provident molestias odit nemo
-        praesentium quas voluptatem aliquid perferendis, iste veritatis vitae. Dolor, eligendi quidem distinctio
-        asperiores doloremque culpa corporis quibusdam earum ex laudantium iure officia ullam nostrum maxime voluptatum
-        laboriosam impedit labore illum. Culpa, veniam dolor odio ad eius nisi, aspernatur quia veritatis blanditiis
-        repellat id minima deserunt beatae?</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque, cum nulla. Ut eligendi tenetur aliquam cum
-        mollitia repellat voluptas, fugiat doloremque sunt commodi enim excepturi distinctio id sapiente incidunt ipsam
-        asperiores cupiditate, labore libero! Ad facere magni cumque perspiciatis, adipisci possimus pariatur quo nobis
-        minus, est enim similique quaerat vel asperiores ipsam harum et, totam fugit.</p>
-    </div>
-  </q-page>
+    </q-page>
+  </guest-layout>
 </template>

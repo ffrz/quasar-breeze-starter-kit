@@ -2,8 +2,7 @@
 import { useForm, usePage } from "@inertiajs/vue3";
 import { ref, watch } from "vue";
 import { useQuasar } from 'quasar';
-import { validateEmail } from "@/helpers";
-import GuestLayout from "@/Layouts/GuestLayout.vue";
+import { validateEmail } from "@/helpers/validations";
 
 defineProps({
   status: {
@@ -38,9 +37,9 @@ watch(
 </script>
 
 <template>
-  <GuestLayout>
+  <guest-layout>
+    <i-head title="Forgot Password" />
     <q-page class="row justify-center items-center">
-      <Head title="Forgot Password" />
       <div class="column">
         <div class="row justify-center">
           <h5 class="text-h5 q-my-md">Forgot Password</h5>
@@ -66,14 +65,14 @@ watch(
             </q-card-actions>
             <q-card-section class="text-center q-pa-none q-mt-md">
               <p class="q-my-xs text-grey-7">
-                <Link :href="route('login')">Back to login page</Link>
+                <i-link :href="route('login')">Back to login page</i-link>
               </p>
             </q-card-section>
           </q-card>
         </q-form>
       </div>
     </q-page>
-  </GuestLayout>
+  </guest-layout>
 </template>
 
 <style>

@@ -1,27 +1,35 @@
 <script setup>
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head } from '@inertiajs/vue3';
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+
+defineOptions({
+  layout: AuthenticatedLayout,
+});
 </script>
 
 <template>
 
   <Head title="Dashboard" />
-
-  <AuthenticatedLayout>
-    <template #header>
-      <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
-        Dashboard
-      </h2>
-    </template>
-
-    <div class="py-12">
-      <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg dark:bg-gray-800">
-          <div class="p-6 text-gray-900 dark:text-gray-100">
-            You're logged in!
-          </div>
-        </div>
-      </div>
+  <q-page class="row">
+    <div class="column q-pa-lg">
+      <div class="q-mb-md text-h4">Home</div>
+      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Autem soluta, accusamus placeat eius eligendi
+        perferendis quisquam veritatis iste debitis laboriosam facere et aliquam quos beatae illo distinctio rerum eos!
+        Expedita, voluptatem. Aut nihil deleniti magni fuga eius labore aliquam nulla quod ullam sunt amet eum
+        asperiores, harum unde eligendi tempore sapiente. Placeat sed, dignissimos voluptatum perspiciatis saepe
+        aspernatur, maxime est, ipsam quas nobis cumque sunt labore molestias? Amet in sed ullam recusandae, nostrum
+        dicta facilis blanditiis incidunt quae commodi soluta id impedit vel fugit illo, molestias reiciendis, provident
+        nam molestiae! Ipsam, hic. Facere aut quisquam praesentium enim illum, pariatur nam.</p>
+      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit aspernatur maxime consectetur, consequatur
+        excepturi facilis praesentium rem placeat sapiente, maiores doloribus modi voluptate. Unde autem dolor officiis
+        numquam incidunt quasi aspernatur nam dolores ratione quidem recusandae, nulla qui provident molestias odit nemo
+        praesentium quas voluptatem aliquid perferendis, iste veritatis vitae. Dolor, eligendi quidem distinctio
+        asperiores doloremque culpa corporis quibusdam earum ex laudantium iure officia ullam nostrum maxime voluptatum
+        laboriosam impedit labore illum. Culpa, veniam dolor odio ad eius nisi, aspernatur quia veritatis blanditiis
+        repellat id minima deserunt beatae?</p>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque, cum nulla. Ut eligendi tenetur aliquam cum
+        mollitia repellat voluptas, fugiat doloremque sunt commodi enim excepturi distinctio id sapiente incidunt ipsam
+        asperiores cupiditate, labore libero! Ad facere magni cumque perspiciatis, adipisci possimus pariatur quo nobis
+        minus, est enim similique quaerat vel asperiores ipsam harum et, totam fugit.</p>
     </div>
-  </AuthenticatedLayout>
+  </q-page>
 </template>

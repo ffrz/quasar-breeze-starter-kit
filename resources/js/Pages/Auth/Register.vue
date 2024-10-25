@@ -1,7 +1,6 @@
 <script setup>
 import { useForm } from "@inertiajs/vue3";
-import { validateEmail } from "@/helpers";
-import GuestLayout from "@/Layouts/GuestLayout.vue";
+import { validateEmail } from "@/helpers/validations";
 
 let form = useForm({
   name: '',
@@ -18,16 +17,12 @@ const submit = () => {
   });
 };
 
-function validatePasswordConfirmation() {
-  return form.password == form.password_confirmation;
-}
-
 </script>
 
 <template>
   <guest-layout>
 
-    <Head title="Login" />
+    <i-head title="Login" />
     <q-page class="row justify-center items-center">
       <div class="column">
         <div class="row justify-center">
@@ -50,7 +45,7 @@ function validatePasswordConfirmation() {
                   :error="!!form.errors.password_confirmation" :error-message="form.errors.password_confirmation"
                   lazy-rules :rules="[
                     (val) => (val && val.length > 0) || 'Please confirm your password.',
-                    () => validatePasswordConfirmation() || 'Password confirmation did not match.'
+                    () => (form.password == form.password_confirmation) || 'Password confirmation did not match.'
                   ]" />
               </q-card-section>
               <q-card-actions>
@@ -59,7 +54,7 @@ function validatePasswordConfirmation() {
               <q-card-section class="text-center q-pa-none q-mt-md">
                 <p class="q-my-xs text-grey-7">
                   Already reigistered?
-                  <Link :href="route('login')">Login</Link>
+                  <i-link :href="route('login')">Login</i-link>
                 </p>
               </q-card-section>
             </q-card>

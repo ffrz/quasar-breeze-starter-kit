@@ -1,8 +1,7 @@
 <script setup>
 import { useForm } from "@inertiajs/vue3";
 import { ref } from "vue";
-import { validateEmail } from "@/helpers";
-import GuestLayout from "@/Layouts/GuestLayout.vue";
+import { validateEmail } from "@/helpers/validations";
 
 let emailInput = ref(null);
 let form = useForm({
@@ -10,6 +9,7 @@ let form = useForm({
   password: "",
   remember: false,
 });
+
 const submit = () => {
   form.clearErrors();
   form.post(route('login'), {
@@ -23,7 +23,7 @@ const submit = () => {
 
 <template>
   <guest-layout>
-    <Head title="Login" />
+    <i-head title="Login" />
     <q-page class="row justify-center items-center">
       <div class="column">
         <div class="row justify-center">
@@ -48,11 +48,11 @@ const submit = () => {
               <q-card-section class="text-center q-pa-none q-mt-md">
                 <p class="q-my-xs text-grey-7">
                   Not reigistered?
-                  <Link :href="route('register')">Create an Account</Link>
+                  <my-link :href="route('register')">Create an Account</my-link>
                 </p>
                 <p class="q-my-xs text-grey-7">
                   Forgot password?
-                  <Link :href="route('password.request')">Reset Password</Link>
+                  <my-link :href="route('password.request')">Reset Password</my-link>
                 </p>
               </q-card-section>
             </q-card>
