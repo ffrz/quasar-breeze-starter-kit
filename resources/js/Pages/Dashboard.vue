@@ -1,17 +1,17 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-
+import BtnLink from "@/Components/BtnLink.vue";
 defineOptions({
   layout: AuthenticatedLayout,
 });
 </script>
 
 <template>
-
-  <Head title="Dashboard" />
+  <i-head title="Dashboard" />
   <q-page class="row">
     <div class="column q-pa-lg">
-      <div class="q-mb-md text-h4">Home</div>
+      <div class="q-mb-md text-h4">Dashboard</div>
+      <btn-link label="Hello" :url="route('logout')" method="post" color="primary" class="q-my-md full-width"/>
       <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Autem soluta, accusamus placeat eius eligendi
         perferendis quisquam veritatis iste debitis laboriosam facere et aliquam quos beatae illo distinctio rerum eos!
         Expedita, voluptatem. Aut nihil deleniti magni fuga eius labore aliquam nulla quod ullam sunt amet eum

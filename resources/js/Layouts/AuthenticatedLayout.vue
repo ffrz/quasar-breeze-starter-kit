@@ -52,10 +52,10 @@ defineComponent({
 const leftDrawerOpen = ref(false);
 const navItems = ref([
   {
-    name: "home",
-    label: "Home",
-    icon: "home",
-    path: "/",
+    name: "dashboard",
+    label: "Dashboard",
+    icon: "dashboard",
+    path: route('dashboard'),
   },
   {
     name: "about",

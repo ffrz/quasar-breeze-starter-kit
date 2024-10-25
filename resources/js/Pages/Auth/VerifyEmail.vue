@@ -1,4 +1,6 @@
 <script setup>
+import { router, useForm } from '@inertiajs/vue3';
+import { computed, onMounted } from 'vue';
 
 const props = defineProps({
   status: {
@@ -15,34 +17,53 @@ const submit = () => {
 const verificationLinkSent = computed(
   () => props.status === 'verification-link-sent',
 );
+
 </script>
 
 <template>
-  <GuestLayout>
+  <guest-layout>
 
-    <Head title="Email Verification" />
+    <i-head title="Email Verification" />
 
-    <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
-      Thanks for signing up! Before getting started, could you verify your
-      email address by clicking on the link we just emailed to you? If you
-      didn't receive the email, we will gladly send you another.
-    </div>
-
-    <div class="mb-4 text-sm font-medium text-green-600 dark:text-green-400" v-if="verificationLinkSent">
-      A new verification link has been sent to the email address you
-      provided during registration.
-    </div>
-
-    <form @submit.prevent="submit">
-      <div class="mt-4 flex items-center justify-between">
-        <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-          Resend Verification Email
-        </PrimaryButton>
-
-        <Link :href="route('logout')" method="post" as="button"
-          class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800">
-        Log Out</Link>
+    <q-page class="row justify-center items-center">
+      <div class="column">
+        <div class="row justify-center">
+          <h5 class="text-h5 q-my-md">Email Verification</h5>
+        </div>
+        <div class="row">
+          <q-form @submit.prevent="submit">
+            <q-card square bordered class="q-pa-md shadow-1">
+              <q-card-section>
+                <p>
+                  Thanks for signing up! Before getting started, could you verify your
+                  email address by clicking on the link we just emailed to you? If you
+                  didn't receive the email, we will gladly send you another.
+                </p>
+                <p class="text-weight-bold text-green-8" v-if="verificationLinkSent">
+                  A new verification link has been sent to the email address you
+                  provided during registration.
+                </p>
+              </q-card-section>
+              <q-card-section>
+                <q-btn class="full-width" color="primary" :class="{ 'opacity-25': form.processing }"
+                  :disabled="form.processing" type="submit" icon="email">
+                  <span class="q-ml-sm">Resend Verification Email</span>
+                </q-btn>
+                <q-btn class="q-mt-md full-width" color="grey" icon="logout" @click.prevent="router.post(route('logout'))">
+                  <span class="q-ml-sm">Log Out</span>
+                </q-btn>
+              </q-card-section>
+            </q-card>
+          </q-form>
+        </div>
       </div>
-    </form>
-  </GuestLayout>
+    </q-page>
+  </guest-layout>
 </template>
+
+
+<style>
+.q-card {
+  width: 360px;
+}
+</style>

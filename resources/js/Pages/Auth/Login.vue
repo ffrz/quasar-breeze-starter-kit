@@ -48,12 +48,15 @@ const submit = () => {
               <q-card-section class="text-center q-pa-none q-mt-md">
                 <p class="q-my-xs text-grey-7">
                   Not reigistered?
-                  <my-link :href="route('register')">Create an Account</my-link>
+                  <i-link :href="route('register')">Create an Account</i-link>
                 </p>
                 <p class="q-my-xs text-grey-7">
                   Forgot password?
-                  <my-link :href="route('password.request')">Reset Password</my-link>
+                  <i-link :href="route('password.request')">Reset Password</i-link>
                 </p>
+                <!-- <p class="q-my-xs text-grey-7">
+                  Forgot password? Please contact our system administrator.
+                </p> -->
               </q-card-section>
             </q-card>
           </q-form>

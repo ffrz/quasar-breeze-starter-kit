@@ -32,5 +32,6 @@ const props = defineProps({
 <style scoped>
 a {
   cursor: pointer;
+  text-decoration: none;
 }
 </style>

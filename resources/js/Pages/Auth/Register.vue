@@ -22,7 +22,7 @@ const submit = () => {
 <template>
   <guest-layout>
 
-    <i-head title="Login" />
+    <i-head title="Register" />
     <q-page class="row justify-center items-center">
       <div class="column">
         <div class="row justify-center">
