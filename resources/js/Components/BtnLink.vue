@@ -20,7 +20,7 @@ export default defineComponent({
         ...props,
         onClick: (event) => {
           router[props.method](props.url);
-          emit('click', event); // Re-emit the click event
+          emit('click', event);
         }
       }, slots);
   }
