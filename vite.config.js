@@ -11,7 +11,7 @@ export default defineConfig({
         // @quasar/plugin-vite options list:
         // https://github.com/quasarframework/quasar/blob/dev/vite-plugin/index.d.ts
         quasar({
-            sassVariables: false,
+            sassVariables: ["resources/css/quasar-variables.sass"],
         }),
         laravel({
             input: ["resources/css/app.css", "resources/js/app.js"],
