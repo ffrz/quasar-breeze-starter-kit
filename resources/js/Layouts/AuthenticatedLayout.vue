@@ -18,8 +18,8 @@
         </div>
       </q-img>
       <q-scroll-area style="height: calc(100% - 150px); margin-top: 150px; border-right: 1px solid #ddd">
-        <q-list padding dense>
-          <q-item clickable v-ripple :active="true" @click="router.get(route('dashboard'))">
+        <q-list id="main-nav">
+          <q-item clickable v-ripple :active="$page.url=='/dashboard'" @click="router.get(route('dashboard'))">
             <q-item-section avatar>
               <q-icon name="dashboard" />
             </q-item-section>
@@ -27,7 +27,29 @@
               <q-item-label>Dashboard</q-item-label>
             </q-item-section>
           </q-item>
-          <q-item clickable v-ripple :active="false" @click="router.get('/about')">
+          <q-expansion-item expand-separator icon="mail" label="Inbox">
+            <q-expansion-item class="subnav" expand-separator icon="receipt" label="Receipts">
+              <q-expansion-item class="subnav" expand-separator label="Today">
+                <q-item class="subnav" clickable v-ripple>Example Link 1</q-item>
+              </q-expansion-item>
+              <q-expansion-item class="subnav" expand-separator label="Yesterday">
+                <q-list>
+                  <q-item class="subnav" clickable v-ripple>Example Link 1</q-item>
+                  <q-item class="subnav" clickable v-ripple>Example Link 2</q-item>
+                </q-list>
+              </q-expansion-item>
+            </q-expansion-item>
+            <q-expansion-item expand-separator icon="schedule" label="Postponed">
+              <q-card>
+                <q-card-section>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti
+                  commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste
+                  eveniet doloribus ullam aliquid.
+                </q-card-section>
+              </q-card>
+            </q-expansion-item>
+          </q-expansion-item>
+          <q-item clickable v-ripple :active="$page.url=='/about'" @click="router.get('/about')">
             <q-item-section avatar>
               <q-icon name="info" />
             </q-item-section>
@@ -43,31 +65,6 @@
               <q-item-label>Logout</q-item-label>
             </q-item-section>
           </q-item>
-          <q-expansion-item dense expand-separator icon="mail" label="Inbox">
-            <q-expansion-item dense :header-inset-level="0.55" expand-separator icon="receipt" label="Receipts">
-              <q-expansion-item dense switch-toggle-side dense-toggle label="Today" :header-inset-level="0.55"
-                :content-inset-level="1.1">
-                <q-item dense>To</q-item>
-              </q-expansion-item>
-              <q-expansion-item dense switch-toggle-side dense-toggle label="Yesterday" :header-inset-level="0.55"
-                :content-inset-level="1.1">
-                <q-item dense>To</q-item>
-              </q-expansion-item>
-
-            </q-expansion-item>
-
-            <q-expansion-item dense :header-inset-level="0.55" :content-inset-level="1.1" expand-separator icon="schedule"
-              label="Postponed">
-              <q-card>
-                <q-card-section>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti
-                  commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste
-                  eveniet doloribus ullam aliquid.
-                </q-card-section>
-              </q-card>
-            </q-expansion-item>
-
-          </q-expansion-item>
         </q-list>
       </q-scroll-area>
     </q-drawer>
