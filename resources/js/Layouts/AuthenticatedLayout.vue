@@ -14,12 +14,12 @@
             <img src="https://cdn.quasar.dev/img/boy-avatar.png">
           </q-avatar>
           <div class="text-weight-bold">{{ user.name }}</div>
-          <div>{{ user.email }}</div>
+          <div><my-link class="text-white" @click="router.get('profile')">{{ user.email }}</my-link></div>
         </div>
       </q-img>
       <q-scroll-area style="height: calc(100% - 150px); margin-top: 150px; border-right: 1px solid #ddd">
         <q-list id="main-nav">
-          <q-item clickable v-ripple :active="$page.url=='/dashboard'" @click="router.get(route('dashboard'))">
+          <q-item clickable v-ripple :active="$page.url == '/dashboard'" @click="router.get(route('dashboard'))">
             <q-item-section avatar>
               <q-icon name="dashboard" />
             </q-item-section>
@@ -49,7 +49,7 @@
               </q-card>
             </q-expansion-item>
           </q-expansion-item>
-          <q-item clickable v-ripple :active="$page.url=='/about'" @click="router.get('/about')">
+          <q-item clickable v-ripple :active="$page.url == '/about'" @click="router.get('/about')">
             <q-item-section avatar>
               <q-icon name="info" />
             </q-item-section>
@@ -103,10 +103,10 @@ function toggleLeftDrawer() {
 }
 </script>
 
-<style scoped>
+<!-- <style scoped>
 @media screen and (min-width: 768px) {
   .q-footer {
     display: none;
   }
 }
-</style>
+</style> -->

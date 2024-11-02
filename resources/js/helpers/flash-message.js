@@ -4,36 +4,38 @@ import { Notify } from "quasar";
 export default function processFlashMessage() {
   const page = usePage();
   let flash = page.props.flash;
-
+  let options;
   if (flash.info) {
-    Notify.create({
+    options = {
       message: flash.info,
       icon: 'info',
       color: 'blue',
-    });
+    };
   }
-
-  if (flash.success) {
-    Notify.create({
+  else if (flash.success) {
+    options = {
       message: flash.success,
       icon: 'check',
       color: 'green',
-    });
+    };
   }
-
-  if (flash.warning) {
-    Notify.create({
+  else if (flash.warning) {
+    options = {
       message: flash.warning,
       icon: 'warning',
       color: 'yellow',
-    });
+    };
   }
-
-  if (flash.error) {
-    Notify.create({
+  else if (flash.error) {
+    options = {
       message: flash.error,
       icon: 'error',
       color: 'red',
-    });
+    };
   }
+  else {
+    return;
+  }
+
+  Notify.create(options);
 }
