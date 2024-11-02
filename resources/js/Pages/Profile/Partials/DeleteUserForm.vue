@@ -1,100 +1,71 @@
 <script setup>
+import { useForm } from '@inertiajs/vue3';
+import { nextTick, ref } from 'vue';
 
 const confirmingUserDeletion = ref(false);
-const passwordInput = ref(null);
+const passwordInputRef = ref(null);
 
 const form = useForm({
-    password: '',
+  password: '',
 });
 
 const confirmUserDeletion = () => {
-    confirmingUserDeletion.value = true;
-
-    nextTick(() => passwordInput.value.focus());
+  confirmingUserDeletion.value = true;
+  nextTick(() => passwordInputRef.value.focus());
 };
 
 const deleteUser = () => {
-    form.delete(route('profile.destroy'), {
-        preserveScroll: true,
-        onSuccess: () => closeModal(),
-        onError: () => passwordInput.value.focus(),
-        onFinish: () => form.reset(),
-    });
+  if (form.password.length == 0) {
+    passwordInputRef.value.focus();
+    return;
+  }
+
+  form.delete(route('profile.destroy'), {
+    preserveScroll: true,
+    onSuccess: () => closeModal(),
+    onError: () => passwordInputRef.value.focus(),
+    onFinish: () => form.reset(),
+  });
 };
 
 const closeModal = () => {
-    confirmingUserDeletion.value = false;
-
-    form.clearErrors();
-    form.reset();
+  confirmingUserDeletion.value = false;
+  form.clearErrors();
+  form.reset();
 };
 </script>
 
 <template>
-    <section class="space-y-6">
-        <header>
-            <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                Delete Account
-            </h2>
-
-            <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                Once your account is deleted, all of its resources and data will
-                be permanently deleted. Before deleting your account, please
-                download any data or information that you wish to retain.
-            </p>
-        </header>
-
-        <DangerButton @click="confirmUserDeletion">Delete Account</DangerButton>
-
-        <Modal :show="confirmingUserDeletion" @close="closeModal">
-            <div class="p-6">
-                <h2
-                    class="text-lg font-medium text-gray-900 dark:text-gray-100"
-                >
-                    Are you sure you want to delete your account?
-                </h2>
-
-                <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                    Once your account is deleted, all of its resources and data
-                    will be permanently deleted. Please enter your password to
-                    confirm you would like to permanently delete your account.
-                </p>
-
-                <div class="mt-6">
-                    <InputLabel
-                        for="password"
-                        value="Password"
-                        class="sr-only"
-                    />
-
-                    <TextInput
-                        id="password"
-                        ref="passwordInput"
-                        v-model="form.password"
-                        type="password"
-                        class="mt-1 block w-3/4"
-                        placeholder="Password"
-                        @keyup.enter="deleteUser"
-                    />
-
-                    <InputError :message="form.errors.password" class="mt-2" />
-                </div>
-
-                <div class="mt-6 flex justify-end">
-                    <SecondaryButton @click="closeModal">
-                        Cancel
-                    </SecondaryButton>
-
-                    <DangerButton
-                        class="ms-3"
-                        :class="{ 'opacity-25': form.processing }"
-                        :disabled="form.processing"
-                        @click="deleteUser"
-                    >
-                        Delete Account
-                    </DangerButton>
-                </div>
-            </div>
-        </Modal>
-    </section>
+  <q-form class="col-lg-4" @submit.prevent="deleteUser">
+    <q-card class="q-pa-lg full-width bg-grey-1">
+      <div class="row">
+        <div class="col">
+          <h5 class="text-h5 q-my-md q-mt-0">Delete Account</h5>
+          <p>Once your account is deleted, all of its resources and data will
+            be permanently deleted. Before deleting your account, please
+            download any data or information that you wish to retain.</p>
+          <q-btn color="negative" @click="confirmUserDeletion">Delete Account</q-btn>
+        </div>
+      </div>
+    </q-card>
+    <q-dialog v-model="confirmingUserDeletion" persistent>
+      <q-card style="min-width: 350px" class="q-pa-md">
+        <q-card-section>
+          <div class="text-h6 q-mb-md">Are you sure you want to delete your account?</div>
+          <p class="text-grey-8">
+            Once your account is deleted, all of its resources and data
+            will be permanently deleted. Please enter your password to
+            confirm you would like to permanently delete your account.
+          </p>
+          <q-input ref="passwordInputRef" autofocus v-model="form.password" square label="Current Password"
+            type="password" lazy-rules :error="!!form.errors.password" :error-message="form.errors.password" :disabled="form.processing"
+            :rules="[(val) => (val && val.length > 0) || 'Password is required.']" @keyup.enter="deleteUser" />
+        </q-card-section>
+        <q-card-actions align="right" class="q-mt-lg">
+          <q-btn color="grey" label="Cancel" @click="closeModal" :disabled="form.processing" />
+          <q-btn color="negative" label="Delete Account" :disabled="form.processing" @click="deleteUser" />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
+  </q-form>
 </template>

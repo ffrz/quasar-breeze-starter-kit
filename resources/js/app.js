@@ -1,7 +1,7 @@
 import "@/bootstrap";
 
-import { createApp, h } from "vue";
-import { createInertiaApp, Head, Link } from "@inertiajs/vue3";
+import { createApp, h, watch } from "vue";
+import { createInertiaApp, Head, Link, usePage } from "@inertiajs/vue3";
 import { Dialog, Loading, Notify, Quasar } from "quasar";
 import AuthenticatedLayout from "./Layouts/AuthenticatedLayout.vue";
 import GuestLayout from "./Layouts/GuestLayout.vue";
@@ -12,19 +12,12 @@ import { router } from "@inertiajs/vue3";
 import processFlashMessage from "@/helpers/flash-message";
 import MyLink from "@/Components/MyLink.vue";
 
-let flashMessageProcessed = false;
-
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
 createInertiaApp({
   title: (title) => "My App" + (title ? " - " + title : ""),
   resolve: (name) => {
     const pages = import.meta.glob("./Pages/**/*.vue", { eager: true });
-
-    if (!flashMessageProcessed) {
-      flashMessageProcessed = true;
-      router.on('success', processFlashMessage);
-    }
 
     return pages[`./Pages/${name}.vue`];
   },
@@ -46,3 +39,6 @@ createInertiaApp({
     color: '#4B5563',
   },
 });
+
+
+router.on('success', processFlashMessage);

@@ -59,7 +59,7 @@ const submit = () => {
               </q-card-actions>
               <q-card-section class="text-center q-pa-none q-mt-md">
                 <p class="q-my-xs text-grey-7">
-                  <i-link :href="route('login')">Login</i-link>
+                  <i-link :href="route('login')">Back to login page.</i-link>
                 </p>
               </q-card-section>
             </q-card>

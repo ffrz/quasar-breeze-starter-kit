@@ -1,6 +1,6 @@
 <script setup>
 import { useForm, usePage } from "@inertiajs/vue3";
-import { ref, watch } from "vue";
+import { ref } from "vue";
 import { useQuasar } from 'quasar';
 import { validateEmail } from "@/helpers/validations";
 
@@ -26,14 +26,14 @@ const submit = () => {
   });
 };
 
-watch(
-  () => usePage().props.status,
-  (newValue, oldValue) => {
-    if (newValue) {
-      // $q.notify(newValue);
-    }
-  }
-);
+// watch(
+//   () => usePage().props.status,
+//   (newValue, oldValue) => {
+//     if (newValue) {
+//       // $q.notify(newValue);
+//     }
+//   }
+// );
 </script>
 
 <template>

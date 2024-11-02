@@ -13,8 +13,9 @@
           <q-avatar size="56px" class="q-mb-sm">
             <img src="https://cdn.quasar.dev/img/boy-avatar.png">
           </q-avatar>
-          <div class="text-weight-bold">{{ user.name }}</div>
-          <div><my-link class="text-white" @click="router.get('profile')">{{ user.email }}</my-link></div>
+          <div class="text-weight-bold">{{ page.props.auth.user.name }}</div>
+          <div><my-link class="text-white" @click="router.get('profile')">{{ page.props.auth.user.email }}</my-link>
+          </div>
         </div>
       </q-img>
       <q-scroll-area style="height: calc(100% - 150px); margin-top: 150px; border-right: 1px solid #ddd">
@@ -85,12 +86,12 @@
 </template>
 
 <script setup>
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, watch } from "vue";
 import { router, usePage } from "@inertiajs/vue3";
 
-const tab = ref();
+// const tab = ref();
 const page = usePage();
-const user = page.props.auth.user;
+// let user = page.props.auth.user;
 
 defineComponent({
   name: "AuthenticatedLayout",
@@ -101,6 +102,18 @@ const leftDrawerOpen = ref(false);
 function toggleLeftDrawer() {
   leftDrawerOpen.value = !leftDrawerOpen.value;
 }
+
+console.log(page.props.flash);
+
+// watch(
+//   () => page.props.auth.user,
+//   (newValue, oldValue) => {
+//     if (newValue) {
+//       user = newValue;
+//     }
+//   }
+// );
+
 </script>
 
 <!-- <style scoped>

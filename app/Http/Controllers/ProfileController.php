@@ -58,6 +58,7 @@ class ProfileController extends Controller
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+        $request->session()->flash('success', 'Account successfully deleted.');
 
         return Redirect::to('/');
     }

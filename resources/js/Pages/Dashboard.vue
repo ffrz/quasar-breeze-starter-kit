@@ -1,9 +1,11 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import BtnLink from "@/Components/BtnLink.vue";
+import { usePage } from "@inertiajs/vue3";
 defineOptions({
   layout: AuthenticatedLayout,
 });
+
 </script>
 
 <template>
