@@ -11,6 +11,7 @@ const props = defineProps({
 const form = useForm({});
 
 const submit = () => {
+  form.clearErrors();
   form.post(route('verification.send'));
 };
 
@@ -22,17 +23,15 @@ const verificationLinkSent = computed(
 
 <template>
   <guest-layout>
-
     <i-head title="Email Verification" />
-
     <q-page class="row justify-center items-center">
       <div class="column">
-        <div class="row justify-center">
-          <h5 class="text-h5 q-my-md">Email Verification</h5>
-        </div>
         <div class="row">
           <q-form @submit.prevent="submit">
             <q-card square bordered class="q-pa-md shadow-1">
+              <q-card-section>
+                <h5 class="q-my-sm text-center">Email Verification</h5>
+              </q-card-section>
               <q-card-section>
                 <p>
                   Thanks for signing up! Before getting started, could you verify your
@@ -49,7 +48,8 @@ const verificationLinkSent = computed(
                   :disabled="form.processing" type="submit" icon="email">
                   <span class="q-ml-sm">Resend Verification Email</span>
                 </q-btn>
-                <q-btn class="q-mt-md full-width" color="grey" icon="logout" @click.prevent="router.post(route('logout'))">
+                <q-btn class="q-mt-md full-width" color="grey" icon="logout"
+                  @click.prevent="router.post(route('logout'))">
                   <span class="q-ml-sm">Log Out</span>
                 </q-btn>
               </q-card-section>

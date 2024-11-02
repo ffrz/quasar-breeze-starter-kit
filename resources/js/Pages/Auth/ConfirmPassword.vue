@@ -6,6 +6,7 @@ const form = useForm({
 });
 
 const submit = () => {
+  form.clearErrors();
   form.post(route('password.confirm'), {
     onFinish: () => form.reset(),
   });
@@ -17,11 +18,11 @@ const submit = () => {
     <i-head title="Confirm Password" />
     <q-page class="row justify-center items-center">
       <div class="column">
-        <div class="row justify-center">
-          <h5 class="text-h5 q-my-md">Confirm Password</h5>
-        </div>
         <q-form @submit.prevent="submit">
           <q-card square bordered class="q-pa-lg shadow-1">
+            <q-card-section>
+              <h5 class="q-my-sm text-center">Confirm Password</h5>
+            </q-card-section>
             <q-card-section class="text-grey-8">
               This is a secure area of the application. Please confirm your
               password before continuing.
@@ -30,14 +31,12 @@ const submit = () => {
               {{ status }}
             </q-card-section>
             <q-card-section>
-              <q-input autofocus square v-model.trim="form.password" label="Password"
-                type="password" lazy-rules
-                :error="!!form.errors.password" :error-message="form.errors.password"
+              <q-input autofocus square v-model.trim="form.password" label="Password" type="password" lazy-rules
+                :disable="form.processing" :error="!!form.errors.password" :error-message="form.errors.password"
                 :rules="[(val) => val && val.length > 0 || 'Password field is required.']" />
             </q-card-section>
             <q-card-actions>
-              <q-btn type="submit" color="primary" class="full-width" label="Confirm"
-                :disabled="form.processing" :class="{ 'opacity-25': form.processing }" />
+              <q-btn type="submit" color="primary" class="full-width" label="Confirm" :disable="form.processing" />
             </q-card-actions>
           </q-card>
         </q-form>

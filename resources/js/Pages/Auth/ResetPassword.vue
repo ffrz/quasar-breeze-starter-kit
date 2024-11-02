@@ -21,6 +21,7 @@ const form = useForm({
 });
 
 const submit = () => {
+  form.clearErrors();
   form.post(route('password.store'), {
     onFinish: () => form.reset('password', 'password_confirmation'),
   });
@@ -34,12 +35,12 @@ const submit = () => {
 
     <q-page class="row justify-center items-center">
       <div class="column">
-        <div class="row justify-center">
-          <h5 class="text-h5 q-my-md">Reset Password</h5>
-        </div>
         <div class="row">
           <q-form class="q-gutter-md" @submit.prevent="submit">
             <q-card square bordered class="q-pa-lg shadow-1">
+              <q-card-section>
+                <h5 class="q-my-sm text-center">Reset Password</h5>
+              </q-card-section>
               <q-card-section>
                 <q-input square v-model.trim="form.email" label="Email" lazy-rules :error="!!form.errors.email"
                   :error-message="form.errors.email"

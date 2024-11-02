@@ -1,13 +1,13 @@
 <template>
   <q-layout view="lHh LpR lFf">
-    <q-header elevated>
+    <q-header>
       <q-toolbar>
         <q-btn flat dense round icon="menu" aria-label="Menu" @click="toggleLeftDrawer" />
         <q-toolbar-title class="absolute-center"> My App </q-toolbar-title>
       </q-toolbar>
     </q-header>
 
-    <q-drawer :breakpoint="768" v-model="leftDrawerOpen" show-if-above bordered>
+    <q-drawer :breakpoint="768" v-model="leftDrawerOpen" show-if-above>
       <q-img class="absolute-top" src="https://cdn.quasar.dev/img/material.png" style="height: 150px">
         <div class="absolute-bottom bg-transparent">
           <q-avatar size="56px" class="q-mb-sm">
@@ -70,7 +70,7 @@
       </q-scroll-area>
     </q-drawer>
 
-    <q-page-container>
+    <q-page-container style="background:#f8f8f8;">
       <slot></slot>
     </q-page-container>
 

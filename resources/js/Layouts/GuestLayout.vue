@@ -1,6 +1,6 @@
 <template>
-  <q-layout view="hHh lpR fFf">
-    <q-header elevated class="bg-primary text-white">
+  <q-layout view="hHh lpR fFf" style="background:#f5f5f5">
+    <!-- <q-header elevated class="bg-primary text-white">
       <q-toolbar>
         <q-toolbar-title align="center">
           <q-avatar>
@@ -9,7 +9,7 @@
           <my-link class="q-pl-md text-white" :href="route('home')" label="My App" />
         </q-toolbar-title>
       </q-toolbar>
-    </q-header>
+    </q-header> -->
     <q-page-container>
       <slot></slot>
     </q-page-container>
