@@ -50,6 +50,14 @@
               </q-card>
             </q-expansion-item>
           </q-expansion-item>
+          <q-item clickable v-ripple :active="$page.url == '/user'" @click="router.get('/user')">
+            <q-item-section avatar>
+              <q-icon name="people" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>Users</q-item-label>
+            </q-item-section>
+          </q-item>
           <q-item clickable v-ripple :active="$page.url == '/about'" @click="router.get('/about')">
             <q-item-section avatar>
               <q-icon name="info" />
@@ -102,8 +110,6 @@ const leftDrawerOpen = ref(false);
 function toggleLeftDrawer() {
   leftDrawerOpen.value = !leftDrawerOpen.value;
 }
-
-console.log(page.props.flash);
 
 // watch(
 //   () => page.props.auth.user,
