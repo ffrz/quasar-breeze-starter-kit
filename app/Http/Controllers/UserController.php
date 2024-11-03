@@ -40,6 +40,8 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->string('password')),
+            'active' => $request->active,
+            'admin' => $request->admin,
         ]);
 
         return response()->json([
@@ -63,7 +65,7 @@ class UserController extends Controller
 
         $user = User::find($id);
 
-        $user->fill($request->only(['name', 'email']));
+        $user->fill($request->only(['name', 'email', 'admin', 'active']));
         if ($request->get('password') != '') {
             $user->password = Hash::make($request->string('password'));
         }

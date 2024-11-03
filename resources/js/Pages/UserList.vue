@@ -33,6 +33,13 @@ const columns = [
     align: "left",
     sortable: true,
   },
+  {
+    name: "admin",
+    label: "Admin",
+    field: "admin",
+    align: "center",
+    sortable: true,
+  },
   { name: "action", label: "Action", align: "center" },
 ];
 
@@ -41,6 +48,8 @@ let form = useApiForm({
   name: "",
   email: "",
   password: "",
+  admin: false,
+  active: false,
 });
 
 onMounted(() => {
@@ -69,6 +78,8 @@ const editUser = (row) => {
   form.id = row.id;
   form.name = row.name;
   form.email = row.email;
+  form.active = Boolean(row.active);
+  form.admin = Boolean(row.admin);
 };
 
 const submitForm = () => {
@@ -217,9 +228,9 @@ const exportToCsv = () => {
   <authenticated-layout>
     <q-page>
       <div class="q-pa-md">
-        <q-table ref="tableRef" flat bordered square :dense="$q.screen.lt.md" color="primary" row-key="id" virtual-scroll
-          title="Users" v-model:pagination="pagination" :filter="filter" :loading="loading" :columns="columns"
-          :rows="rows" :rows-per-page-options="[10, 25, 50]" @request="fetchUsers" binary-state-sort>
+        <q-table ref="tableRef" flat bordered square :dense="true || $q.screen.lt.md" color="primary" row-key="id"
+          virtual-scroll title="Users" v-model:pagination="pagination" :filter="filter" :loading="loading"
+          :columns="columns" :rows="rows" :rows-per-page-options="[10, 25, 50]" @request="fetchUsers" binary-state-sort>
           <template v-slot:loading>
             <q-inner-loading showing color="red" />
           </template>
@@ -248,18 +259,33 @@ const exportToCsv = () => {
               <q-icon size="2em" :name="filter ? 'filter_b_and_w' : icon" />
             </div>
           </template>
-
-          <template v-slot:body-cell-action="props">
-            <q-td class="q-gutter-x-sm" align="center">
-              <q-btn :disable="props.row.id == currentUser.id" rounded dense color="grey" icon="edit"
-                @click="editUser(props.row)">
-                <q-tooltip>Edit User</q-tooltip>
-              </q-btn>
-              <q-btn :disable="props.row.id == currentUser.id" rounded dense color="red" icon="delete"
-                @click="deleteUser(props.row)">
-                <q-tooltip>Delete User</q-tooltip>
-              </q-btn>
-            </q-td>
+          <template v-slot:body="props">
+            <q-tr :props="props" :class="(!props.row.active) ? 'bg-red-1' : ''">
+              <q-td key="name" :props="props">
+                {{ props.row.name }}
+              </q-td>
+              <q-td key="email" :props="props">
+                {{ props.row.email }}
+              </q-td>
+              <q-td key="admin" :props="props" align="center">
+                <span v-if="props.row.admin">
+                  Yes
+                </span>
+                <span v-else>
+                  No
+                </span>
+              </q-td>
+              <q-td key="action" class="q-gutter-x-sm" :props="props" align="center">
+                <q-btn :disable="props.row.id == currentUser.id" rounded dense color="grey" icon="edit"
+                  @click="editUser(props.row)">
+                  <q-tooltip>Edit User</q-tooltip>
+                </q-btn>
+                <q-btn :disable="props.row.id == currentUser.id" rounded dense color="red" icon="delete"
+                  @click="deleteUser(props.row)">
+                  <q-tooltip>Delete User</q-tooltip>
+                </q-btn>
+              </q-td>
+            </q-tr>
           </template>
         </q-table>
       </div>
@@ -284,6 +310,10 @@ const exportToCsv = () => {
                 :rules="[(val) => validateEmail(val) || 'Must be a valid email.']" />
               <q-input v-model="form.password" type="password" label="Password" lazy-rules :disable="form.processing"
                 :error="!!form.errors.password" :error-message="form.errors.password" />
+              <q-checkbox class="full-width q-pl-none" v-model="form.admin"
+                :disable="form.processing" label="Administrator" />
+              <q-checkbox class="full-width q-pl-none" v-model="form.active"
+                :disable="form.processing" label="Active" />
             </q-card-section>
             <q-card-actions align="right">
               <q-btn type="submit" label="Save" color="primary" icon="check" :disable="form.processing" />
