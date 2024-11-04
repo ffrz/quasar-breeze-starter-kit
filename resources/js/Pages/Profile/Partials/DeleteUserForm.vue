@@ -38,7 +38,7 @@ const closeModal = () => {
 
 <template>
   <q-form class="row" @submit.prevent="deleteUser">
-    <q-card square flat bordered class="col q-pa-md">
+    <q-card square flat bordered class="col q-pa-sm">
       <q-card-section>
         <h2 class="text-h6 q-my-xs">Delete Account</h2>
         <p>Once your account is deleted, all of its resources and data will

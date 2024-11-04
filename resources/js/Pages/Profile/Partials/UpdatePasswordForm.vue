@@ -33,7 +33,7 @@ const updatePassword = () => {
 
 <template>
   <q-form class="row" @submit.prevent="updatePassword">
-    <q-card square flat bordered class="col q-pa-md">
+    <q-card square flat bordered class="col q-pa-sm">
       <q-card-section>
         <h2 class="text-h6 q-my-xs">Update Password</h2>
         <p>Ensure your account is using a long, random password to stay

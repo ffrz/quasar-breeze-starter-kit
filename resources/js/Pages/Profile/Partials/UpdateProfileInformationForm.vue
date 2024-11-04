@@ -34,7 +34,7 @@ const submit = () => {
 
 <template>
   <q-form class="row" @submit.prevent="submit">
-    <q-card square flat bordered class="col q-pa-md">
+    <q-card square flat bordered class="col q-pa-sm">
       <q-card-section>
         <h2 class="text-h6 q-my-xs">Profile Information</h2>
         <p>Update your account's profile information and email address.</p>
