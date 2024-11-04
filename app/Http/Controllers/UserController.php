@@ -22,8 +22,7 @@ class UserController extends Controller
             $q->orWhere('email', 'like', '%' . $search . '%');
         }
 
-        $users = $q->paginate($request->get('per_page', 10))
-            ->withQueryString();
+        $users = $q->paginate($request->get('per_page', 10))->withQueryString();
 
         return response()->json($users);
     }
@@ -67,7 +66,15 @@ class UserController extends Controller
 
         $user->fill($request->only(['name', 'email', 'admin', 'active']));
         if ($request->get('password') != '') {
-            $user->password = Hash::make($request->string('password'));
+            if ($user->email != 'admin@example.com') {
+                $user->password = Hash::make($request->string('password'));
+            } else {
+                $user->save();
+                return response()->json([
+                    'message' => 'User updated! Admin password ignored for demo purpose!',
+                    'data' => $user,
+                ]);
+            }
         }
         $user->save();
 

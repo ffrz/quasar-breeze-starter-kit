@@ -38,6 +38,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/add', [UserV2Controller::class, 'add']);
         Route::get('/edit/{id}', [UserV2Controller::class, 'edit']);
         Route::post('/save', [UserV2Controller::class, 'save']);
+        Route::post('/delete/{id}', [UserV2Controller::class, 'delete']);
     });
 
 });

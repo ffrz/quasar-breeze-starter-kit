@@ -27,6 +27,11 @@ class UserV2Controller extends Controller
     public function edit(Request $request, $id)
     {
         $user = User::findOrFail($id);
+
+        if ($user == Auth::user()) {
+            return redirect('/user-v2')->with('warning', 'Can not edit current user.');
+        }
+
         return inertia('UserV2/Editor', [
             'data' => $user,
         ]);
@@ -52,12 +57,15 @@ class UserV2Controller extends Controller
 
     public function save(Request $request)
     {
+        $rules = [
+            'name' => 'required|max:255',
+            'email' => 'required|unique:users,email,' . $request->id . '|min:3|max:100',
+            'password' => 'required|min:5|max:40',
+        ];
+
+        $message = '';
         if (!$request->id) {
-            $request->validate([
-                'name' => 'required|max:255',
-                'email' => 'required|unique:users,email|min:3|max:100',
-                'password' => 'required|min:5|max:40',
-            ]);
+            $request->validate($rules);
 
             $user = User::create([
                 'name' => $request->name,
@@ -67,33 +75,26 @@ class UserV2Controller extends Controller
                 'admin' => $request->admin,
             ]);
 
-            $request->session()->flash('success', 'New user created.');
+            $message = 'New user created.';
         } else {
-            $rules = [
-                'name' => 'required|max:255',
-                'email' => 'required|unique:users,email,' . $request->id . '|min:3|max:100',
-            ];
-
-            if ($request->get('password') != '') {
-                $rules['password'] = 'required|min:5|max:40';
+            if (empty($request->get('password'))) {
+                unset($rules['password']);
             }
-
             $request->validate($rules);
 
             $user = User::findOrFail($request->id);
-
             $user->fill($request->only(['name', 'email', 'admin', 'active']));
-            if ($request->get('password') != '') {
+            if (!empty($request->get('password'))) {
                 $user->password = Hash::make($request->string('password'));
             }
             $user->save();
-            $request->session()->flash('success', 'User updated.');
+            $message = 'User updated.';
         }
 
-        return redirect('/user-v2');
+        return redirect('/user-v2')->with('success', $message);
     }
 
-    public function destroy(Request $request, $id)
+    public function delete($id)
     {
         $user = User::findOrFail($id);
 

@@ -59,7 +59,7 @@ const deleteUser = (row) => {
   }).onOk(() => {
     loading.value = true;
     axios
-      .delete("users/" + row.id)
+      .post("user-v2/delete/" + row.id)
       .then((response) => {
         $q.notify(response.data.message);
         fetchUsers();
@@ -178,7 +178,8 @@ const exportToCsv = () => {
 
           <template v-slot:top-left>
             <div class="q-gutter-sm">
-              <q-btn color="primary" icon="add" @click="router.get('user-v2/add')" label="Add User" class="desktop-only" />
+              <q-btn color="primary" icon="add" @click="router.get('user-v2/add')" label="Add User"
+                class="desktop-only" />
               <!--<q-btn no-caps color="grey-8" icon="archive" @click="exportToCsv" />-->
             </div>
           </template>
@@ -217,12 +218,12 @@ const exportToCsv = () => {
                 </span>
               </q-td>
               <q-td key="action" class="q-gutter-x-sm" :props="props" align="center">
-                <q-btn :disable="props.row.id == currentUser.id" rounded dense color="grey" icon="edit"
-                  @click="router.get('user-v2/edit/' + props.row.id)">
+                <q-btn :disable="props.row.id == currentUser.id || props.row.email == 'admin@example.com'" rounded dense
+                  color="grey" icon="edit" @click="router.get('user-v2/edit/' + props.row.id)">
                   <q-tooltip>Edit User</q-tooltip>
                 </q-btn>
-                <q-btn :disable="props.row.id == currentUser.id" rounded dense color="red" icon="delete"
-                  @click="deleteUser(props.row)">
+                <q-btn :disable="props.row.id == currentUser.id || props.row.email == 'admin@example.com'" rounded dense
+                  color="red" icon="delete" @click="deleteUser(props.row)">
                   <q-tooltip>Delete User</q-tooltip>
                 </q-btn>
               </q-td>

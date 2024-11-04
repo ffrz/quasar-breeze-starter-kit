@@ -23,7 +23,7 @@ export default function processFlashMessage() {
     options = {
       message: flash.warning,
       icon: 'warning',
-      color: 'yellow',
+      color: 'orange',
     };
   }
   else if (flash.error) {
