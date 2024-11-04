@@ -9,35 +9,12 @@ use Illuminate\Support\Facades\Hash;
 
 class UserV2Controller extends Controller
 {
-    public function list(Request $request)
-    {
-        return inertia('UserV2/List');
-    }
-
-    public function add(Request $request)
-    {
-        $user = new User();
-        $user->active = true;
-        $user->admin = true;
-        return inertia('UserV2/Editor', [
-            'data' => $user,
-        ]);
-    }
-
-    public function edit(Request $request, $id)
-    {
-        $user = User::findOrFail($id);
-
-        if ($user == Auth::user()) {
-            return redirect('/user-v2')->with('warning', 'Can not edit current user.');
-        }
-
-        return inertia('UserV2/Editor', [
-            'data' => $user,
-        ]);
-    }
-
     public function index(Request $request)
+    {
+        return inertia('UserV2/Index');
+    }
+
+    public function data(Request $request)
     {
         $orderBy = $request->get('order_by', 'name');
         $orderType = $request->get('order_type', 'asc');
@@ -55,6 +32,22 @@ class UserV2Controller extends Controller
         return response()->json($users);
     }
 
+    public function editor($id = 0)
+    {
+        $user = $id ? User::findOrFail($id) : new User();
+
+        if (!$id) {
+            $user->active = true;
+            $user->admin = true;
+        } else if ($user == Auth::user()) {
+            return redirect('/user-v2')->with('warning', 'Can not edit current user.');
+        }
+
+        return inertia('UserV2/Editor', [
+            'data' => $user,
+        ]);
+    }
+
     public function save(Request $request)
     {
         $rules = [
@@ -62,34 +55,30 @@ class UserV2Controller extends Controller
             'email' => 'required|unique:users,email,' . $request->id . '|min:3|max:100',
             'password' => 'required|min:5|max:40',
         ];
-
+        $user = null;
         $message = '';
+        $fields = ['name', 'email', 'admin', 'active'];
+        $password = $request->get('password');
+
         if (!$request->id) {
             $request->validate($rules);
-
-            $user = User::create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => Hash::make($request->string('password')),
-                'active' => $request->active,
-                'admin' => $request->admin,
-            ]);
-
+            $user = new User();
             $message = 'New user created.';
         } else {
             if (empty($request->get('password'))) {
                 unset($rules['password']);
+                unset($fields['password']);
             }
             $request->validate($rules);
-
             $user = User::findOrFail($request->id);
-            $user->fill($request->only(['name', 'email', 'admin', 'active']));
-            if (!empty($request->get('password'))) {
-                $user->password = Hash::make($request->string('password'));
-            }
-            $user->save();
             $message = 'User updated.';
         }
+
+        if (!empty($password)) {
+            $user->password = Hash::make($password);
+        }
+        $user->fill($request->only($fields));
+        $user->save();
 
         return redirect('/user-v2')->with('success', $message);
     }

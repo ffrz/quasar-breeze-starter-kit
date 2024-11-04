@@ -34,9 +34,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('users', UserController::class);
 
     Route::prefix('user-v2')->group(function() {
-        Route::get('', [UserV2Controller::class, 'list']);
-        Route::get('/add', [UserV2Controller::class, 'add']);
-        Route::get('/edit/{id}', [UserV2Controller::class, 'edit']);
+        Route::get('', [UserV2Controller::class, 'index']);
+        Route::get('/data', [UserV2Controller::class, 'data']);
+        Route::get('/add', [UserV2Controller::class, 'editor']);
+        Route::get('/edit/{id}', [UserV2Controller::class, 'editor']);
         Route::post('/save', [UserV2Controller::class, 'save']);
         Route::post('/delete/{id}', [UserV2Controller::class, 'delete']);
     });

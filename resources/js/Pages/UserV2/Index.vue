@@ -101,7 +101,7 @@ const fetchUsers = (props = null) => {
   loading.value = true;
 
   axios
-    .get("users", { params: params })
+    .get("user-v2/data", { params: params })
     .then((response) => {
       rows.value = response.data.data;
       pagination.value.page = response.data.current_page;
