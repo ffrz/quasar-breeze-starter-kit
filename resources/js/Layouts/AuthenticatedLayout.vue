@@ -14,8 +14,7 @@
             <img src="https://cdn.quasar.dev/img/boy-avatar.png">
           </q-avatar>
           <div class="text-weight-bold">{{ page.props.auth.user.name }}</div>
-          <div><my-link class="text-white" @click="router.get('profile')">{{ page.props.auth.user.email }}</my-link>
-          </div>
+          <div><my-link class="text-white" href="/profile" :label="page.props.auth.user.email" /></div>
         </div>
       </q-img>
       <q-scroll-area style="height: calc(100% - 150px); margin-top: 150px; border-right: 1px solid #ddd">
@@ -56,6 +55,14 @@
             </q-item-section>
             <q-item-section>
               <q-item-label>Users</q-item-label>
+            </q-item-section>
+          </q-item>
+          <q-item clickable v-ripple :active="$page.url == '/user-v2'" @click="router.get('/user-v2')">
+            <q-item-section avatar>
+              <q-icon name="people" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>Users V2</q-item-label>
             </q-item-section>
           </q-item>
           <q-item clickable v-ripple :active="$page.url == '/about'" @click="router.get('/about')">
