@@ -54,6 +54,7 @@ let form = useApiForm({
 
 onMounted(() => {
   filter.value = localStorage.getItem("my-app.user-list-page.filter");
+  fetchUsers();
 });
 
 watch(filter, (newValue) => {

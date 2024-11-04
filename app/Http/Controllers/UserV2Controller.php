@@ -16,8 +16,19 @@ class UserV2Controller extends Controller
 
     public function add(Request $request)
     {
+        $user = new User();
+        $user->active = true;
+        $user->admin = true;
         return inertia('UserV2/Editor', [
-            'editorMode' => 'add',
+            'data' => $user,
+        ]);
+    }
+
+    public function edit(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+        return inertia('UserV2/Editor', [
+            'data' => $user,
         ]);
     }
 
@@ -34,59 +45,52 @@ class UserV2Controller extends Controller
             $q->orWhere('email', 'like', '%' . $search . '%');
         }
 
-        $users = $q->paginate($request->get('per_page', 10))
-            ->withQueryString();
+        $users = $q->paginate($request->get('per_page', 10))->withQueryString();
 
         return response()->json($users);
     }
 
-    public function store(Request $request)
+    public function save(Request $request)
     {
-        $request->validate([
-            'name' => 'required|max:255',
-            'email' => 'required|unique:users,email|min:3|max:100',
-            'password' => 'required|min:5|max:40',
-        ]);
+        if (!$request->id) {
+            $request->validate([
+                'name' => 'required|max:255',
+                'email' => 'required|unique:users,email|min:3|max:100',
+                'password' => 'required|min:5|max:40',
+            ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->string('password')),
-            'active' => $request->active,
-            'admin' => $request->admin,
-        ]);
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->string('password')),
+                'active' => $request->active,
+                'admin' => $request->admin,
+            ]);
 
-        return response()->json([
-            'message' => 'New user created!',
-            'data' => $user,
-        ]);
-    }
+            $request->session()->flash('success', 'New user created.');
+        } else {
+            $rules = [
+                'name' => 'required|max:255',
+                'email' => 'required|unique:users,email,' . $request->id . '|min:3|max:100',
+            ];
 
-    public function update(Request $request, $id)
-    {
-        $rules = [
-            'name' => 'required|max:255',
-            'email' => 'required|unique:users,email,' . $id . '|min:3|max:100',
-        ];
+            if ($request->get('password') != '') {
+                $rules['password'] = 'required|min:5|max:40';
+            }
 
-        if ($request->get('password') != '') {
-            $rules['password'] = 'required|min:5|max:40';
+            $request->validate($rules);
+
+            $user = User::findOrFail($request->id);
+
+            $user->fill($request->only(['name', 'email', 'admin', 'active']));
+            if ($request->get('password') != '') {
+                $user->password = Hash::make($request->string('password'));
+            }
+            $user->save();
+            $request->session()->flash('success', 'User updated.');
         }
 
-        $request->validate($rules);
-
-        $user = User::find($id);
-
-        $user->fill($request->only(['name', 'email', 'admin', 'active']));
-        if ($request->get('password') != '') {
-            $user->password = Hash::make($request->string('password'));
-        }
-        $user->save();
-
-        return response()->json([
-            'message' => 'User updated!',
-            'data' => $user,
-        ]);
+        return redirect('/user-v2');
     }
 
     public function destroy(Request $request, $id)

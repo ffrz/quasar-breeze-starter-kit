@@ -1,39 +1,39 @@
 <script setup>
 import { validateEmail } from "@/helpers/validations";
-import { useForm } from "@inertiajs/vue3";
+import { router, useForm, usePage } from "@inertiajs/vue3";
+import { useQuasar } from "quasar";
+import { onMounted } from "vue";
 
-defineProps({
-  editorMode: {
-    type: String,
-  },
-  form: {
-    type: Object,
-  }
-});
+const page = usePage();
+const $q = useQuasar();
 
 const form = useForm({
+  id: page.props.data.id,
+  name: page.props.data.name,
+  email: page.props.data.email,
+  password: "",
+  admin: !!page.props.data.admin,
+  active: !!page.props.data.active,
 });
 
+onMounted(() => {
+  console.log(page.props.data);
+});
 
-const submitForm = () => {
+const submit = () => {
   form.clearErrors();
-  form.submit(
-    editorMode.value == "add" ? "post" : "put",
-    "users" + (editorMode.value == "add" ? "" : "/" + form.id),
+  form.post("/user-v2/save",
     {
       preserveScroll: true,
-      onSuccess: (response) => {
-        showUserEditor.value = false;
-        form.reset();
+      onError: (response) => {
         $q.notify({
           message: response.message,
           icon: "info",
-          color: "green",
+          color: "negative",
           actions: [
             { icon: "close", color: "white", round: true, dense: true },
           ],
         });
-        fetchUsers();
       },
     }
   );
@@ -46,12 +46,12 @@ const submitForm = () => {
     <q-page class="row">
       <i-head title="Add User" />
       <div class="col col-lg-6 q-pa-md">
-        <q-form class="row" @submit.prevent="submitForm">
+        <q-form class="row" @submit.prevent="submit">
           <q-card square flat bordered class="col q-pa-sm">
             <q-card-section>
               <div class="text-h6">
-                <template v-if="editorMode == 'add'"> Add User </template>
-                <template v-else> Edit User </template>
+                <template v-if="!!form.id">Edit User </template>
+                <template v-else> Add User </template>
               </div>
             </q-card-section>
             <q-card-section class="q-pt-none">
@@ -70,9 +70,9 @@ const submitForm = () => {
               <q-checkbox class="full-width q-pl-none" v-model="form.active" :disable="form.processing"
                 label="Active" />
             </q-card-section>
-            <q-card-actions align="right">
+            <q-card-actions>
               <q-btn type="submit" label="Save" color="primary" icon="check" :disable="form.processing" />
-              <q-btn label="Cancel" v-close-popup color="grey-7" icon="close" :disable="form.processing" />
+              <q-btn label="Cancel" v-close-popup color="grey-7" icon="close" :disable="form.processing" @click="router.get('/user-v2')"/>
             </q-card-actions>
           </q-card>
         </q-form>

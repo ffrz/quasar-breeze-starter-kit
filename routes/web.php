@@ -36,7 +36,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::prefix('user-v2')->group(function() {
         Route::get('', [UserV2Controller::class, 'list']);
         Route::get('/add', [UserV2Controller::class, 'add']);
-        Route::get('/edit', [UserV2Controller::class, 'edit']);
+        Route::get('/edit/{id}', [UserV2Controller::class, 'edit']);
+        Route::post('/save', [UserV2Controller::class, 'save']);
     });
 
 });
