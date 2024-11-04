@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="hHh lpR fFf" style="background:#f5f5f5">
+  <q-layout view="hHh lpR fff" style="background:#f5f5f5">
     <q-header elevated class="bg-primary text-white">
       <q-toolbar style="max-width: 980px; margin:0 auto;">
         <q-toolbar-title align="left">
@@ -17,6 +17,11 @@
     <q-page-container style="max-width: 1024px; margin:0 auto;">
       <slot></slot>
     </q-page-container>
+    <q-footer class="transparent">
+      <div class="q-mt-lg q-mb-xl justify-center items-center flex text-grey-6">
+        <span>&copy; My App</span>
+      </div>
+    </q-footer>
   </q-layout>
 </template>
 
@@ -28,10 +33,11 @@ defineComponent({
 })
 </script>
 <style scoped>
-  .q-toolbar a {
-    color: #ddd;
-  }
-  .q-toolbar a:hover {
-    color: #fff;
-  }
+.q-toolbar a {
+  color: #ddd;
+}
+
+.q-toolbar a:hover {
+  color: #fff;
+}
 </style>

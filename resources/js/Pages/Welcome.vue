@@ -1,25 +1,3 @@
-<script setup>
-import { Head, Link } from '@inertiajs/vue3';
-
-
-defineProps({
-  canLogin: {
-    type: Boolean,
-  },
-  canRegister: {
-    type: Boolean,
-  },
-  laravelVersion: {
-    type: String,
-    required: true,
-  },
-  phpVersion: {
-    type: String,
-    required: true,
-  },
-});
-</script>
-
 <template>
   <guest-layout>
     <q-page class="row">
@@ -51,6 +29,14 @@ defineProps({
           asperiores cupiditate, labore libero! Ad facere magni cumque perspiciatis, adipisci possimus pariatur quo
           nobis
           minus, est enim similique quaerat vel asperiores ipsam harum et, totam fugit.</p>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Assumenda quos iure aliquid velit quod! Laboriosam,
+          consectetur. Porro molestias ullam architecto iure enim similique, molestiae sint nulla impedit officia odio
+          nam repellendus accusantium harum ex nemo explicabo recusandae eius id nisi totam minima sit expedita.
+          Deleniti explicabo, quas dolorum numquam perspiciatis delectus modi impedit alias nemo exercitationem eaque!
+          Nulla, rem, voluptates, sint ullam expedita veritatis error deserunt vero possimus temporibus similique est
+          consequuntur delectus. Nesciunt labore ex praesentium magni ullam eius provident nam laboriosam. At atque
+          aliquam nemo vel sequi in inventore libero voluptatem nisi nam illo, adipisci laudantium nihil magnam
+          perspiciatis eos rerum itaque, excepturi consectetur quo. Mollitia, dignissimos aut?</p>
       </q-card>
     </q-page>
   </guest-layout>
