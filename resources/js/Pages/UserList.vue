@@ -237,7 +237,7 @@ const exportToCsv = () => {
 
           <template v-slot:top-left>
             <div class="q-gutter-sm">
-              <q-btn color="primary" icon="add" @click="addUser" label="Add User" class="desktop-only" />
+              <q-btn color="primary" icon="add" @click="addUser" label="Add User" />
               <!--<q-btn no-caps color="grey-8" icon="archive" @click="exportToCsv" />-->
             </div>
           </template>
