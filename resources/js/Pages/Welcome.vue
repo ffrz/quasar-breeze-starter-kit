@@ -22,15 +22,9 @@ defineProps({
 
 <template>
   <guest-layout>
-    <i-head title="Welcome" />
     <q-page class="row">
-      <div class="column q-pa-lg">
-        <div class="row justify-center items-center">
-          <div class="q-gutter-md q-ma-lg">
-            <i-link :href="route('login')">Login</i-link>
-            <i-link :href="route('register')">Register</i-link>
-          </div>
-        </div>
+      <i-head title="Welcome" />
+      <q-card class="col q-pa-xl q-ma-md" square flat bordered>
         <div class="q-mb-md text-h4">Home</div>
         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Autem soluta, accusamus placeat eius eligendi
           perferendis quisquam veritatis iste debitis laboriosam facere et aliquam quos beatae illo distinctio rerum
@@ -57,7 +51,7 @@ defineProps({
           asperiores cupiditate, labore libero! Ad facere magni cumque perspiciatis, adipisci possimus pariatur quo
           nobis
           minus, est enim similique quaerat vel asperiores ipsam harum et, totam fugit.</p>
-      </div>
+      </q-card>
     </q-page>
   </guest-layout>
 </template>
