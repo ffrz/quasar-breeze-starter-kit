@@ -6,7 +6,7 @@
           <q-avatar>
             <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg">
           </q-avatar>
-          <my-link class="q-pl-md text-white" :href="route('home')" label="My App" />
+          <my-link class="q-pl-md text-white" :href="route('home')" :label="$config.APP_NAME" />
         </q-toolbar-title>
         <div class="q-gutter-md q-ma-none">
           <my-link label="Login" :href="route('login')" />
@@ -19,7 +19,7 @@
     </q-page-container>
     <q-footer class="transparent">
       <div class="q-mt-lg q-mb-xl justify-center items-center flex text-grey-6">
-        <span>&copy; My App</span>
+        <span>&copy; 2024 - {{ $config.APP_NAME }} v{{ $config.APP_VERSION_STR }}</span>
       </div>
     </q-footer>
   </q-layout>
@@ -31,6 +31,8 @@ import { defineComponent } from "vue";
 defineComponent({
   name: 'AuthLayout'
 })
+
+
 </script>
 <style scoped>
 .q-toolbar a {

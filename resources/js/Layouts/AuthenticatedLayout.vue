@@ -3,7 +3,7 @@
     <q-header>
       <q-toolbar>
         <q-btn flat dense round icon="menu" aria-label="Menu" @click="toggleLeftDrawer" />
-        <q-toolbar-title class="absolute-center"> My App </q-toolbar-title>
+        <q-toolbar-title class="absolute-center">{{ $config.APP_NAME }}</q-toolbar-title>
       </q-toolbar>
     </q-header>
 
@@ -18,7 +18,7 @@
         </div>
       </q-img>
       <q-scroll-area style="height: calc(100% - 150px); margin-top: 150px; border-right: 1px solid #ddd">
-        <q-list id="main-nav">
+        <q-list id="main-nav" style="margin-bottom: 50px;">
           <q-item clickable v-ripple :active="$page.url == '/dashboard'" @click="router.get(route('dashboard'))">
             <q-item-section avatar>
               <q-icon name="dashboard" />
@@ -83,6 +83,7 @@
               <q-item-label>Logout</q-item-label>
             </q-item-section>
           </q-item>
+          <div class="absolute-bottom text-grey-6 q-pa-md">&copy; 2024 - {{ $config.APP_NAME + ' v' + $config.APP_VERSION_STR }}</div>
         </q-list>
       </q-scroll-area>
     </q-drawer>
@@ -92,13 +93,13 @@
     </q-page-container>
 
     <!-- Footer hanya tampil jika di tampilan screen kecil, lihat di bagian style di bawah pada file ini -->
-    <!-- <q-footer elevated>
-      <q-tabs v-model="tab" indicator-color="yellow" class="bg-primary text-white shadow-2">
+    <!-- <q-footer> -->
+      <!-- <q-tabs v-model="tab" indicator-color="yellow" class="bg-primary text-white shadow-2">
         <q-tab name="mails" icon="mail" label="Mails" />
         <q-tab name="alarms" icon="alarm" label="Alarms" />
         <q-tab name="movies" icon="movie" label="Movies" />
-      </q-tabs>
-    </q-footer> -->
+      </q-tabs> -->
+    <!-- </q-footer> -->
   </q-layout>
 </template>
 
