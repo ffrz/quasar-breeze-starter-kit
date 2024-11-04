@@ -19,7 +19,7 @@ const submit = () => {
     <q-page class="row justify-center items-center">
       <div class="column">
         <q-form @submit.prevent="submit">
-          <q-card square bordered class="q-pa-lg shadow-1">
+          <q-card square bordered class="q-pa-md shadow-1">
             <q-card-section>
               <h5 class="q-my-sm text-center">Confirm Password</h5>
             </q-card-section>

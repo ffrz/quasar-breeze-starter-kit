@@ -37,7 +37,7 @@ const submit = () => {
       <div class="column">
         <div class="row">
           <q-form class="q-gutter-md" @submit.prevent="submit">
-            <q-card square bordered class="q-pa-lg shadow-1">
+            <q-card square bordered class="q-pa-md shadow-1">
               <q-card-section>
                 <h5 class="q-my-sm text-center">Reset Password</h5>
               </q-card-section>

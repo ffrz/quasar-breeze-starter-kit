@@ -21,13 +21,12 @@ const submit = () => {
 
 <template>
   <guest-layout>
-
     <i-head title="Register" />
     <q-page class="row justify-center items-center">
       <div class="column">
         <div class="row">
           <q-form class="q-gutter-md" @submit.prevent="submit">
-            <q-card square bordered class="q-pa-lg shadow-1">
+            <q-card id="register-card" square bordered class="q-pa-md shadow-1">
               <q-card-section>
                 <h5 class="q-my-sm text-center">Register</h5>
               </q-card-section>
@@ -41,7 +40,7 @@ const submit = () => {
                 <q-input square v-model="form.password" type="password" label="Password" :error="!!form.errors.password"
                   :error-message="form.errors.password" lazy-rules :disable="form.processing"
                   :rules="[(val) => (val && val.length > 0) || 'Please enter password']" />
-                <q-input square v-model="form.password_confirmation" type="password" label="Password"
+                <q-input square v-model="form.password_confirmation" type="password" label="Confirm Password"
                   :disable="form.processing" :error="!!form.errors.password_confirmation"
                   :error-message="form.errors.password_confirmation" lazy-rules :rules="[
                     (val) => (val && val.length > 0) || 'Please confirm your password.',
@@ -64,10 +63,3 @@ const submit = () => {
     </q-page>
   </guest-layout>
 </template>
-
-<style>
-.q-card {
-  min-width: 360px;
-  max-width: 400px;
-}
-</style>
