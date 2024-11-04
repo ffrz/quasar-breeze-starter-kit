@@ -57,7 +57,7 @@
               <q-item-label>Users</q-item-label>
             </q-item-section>
           </q-item>
-          <q-item clickable v-ripple :active="$page.url == '/user-v2'" @click="router.get('/user-v2')">
+          <q-item clickable v-ripple :active="$page.url.startsWith('/user-v2')" @click="router.get('/user-v2')">
             <q-item-section avatar>
               <q-icon name="people" />
             </q-item-section>
